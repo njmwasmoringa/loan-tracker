@@ -1,0 +1,29 @@
+{
+  "debtors": [
+    {
+      "debtorName": "Bejamin",
+      "idNumber": "345345",
+      "phoneNumber": "345345",
+      "debtAmount": 60000,
+      "balance": 60000,
+      "id": 1
+    },
+    {
+      "debtorName": "Wanjiku",
+      "idNumber": "09098",
+      "phoneNumber": "0980",
+      "debtAmount": 2400000,
+      "balance": 2400000,
+      "id": 2
+    },
+    {
+      "debtorName": "Julius Njuguna",
+      "idNumber": "456456",
+      "phoneNumber": "456456",
+      "debtAmount": 12000,
+      "balance": 12000,
+      "id": 3
+    }
+  ],
+  "repayments": []
+}

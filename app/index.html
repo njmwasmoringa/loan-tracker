@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="top-bar">
+            <h3>Loan Tracker</h3>
+        </div>
+
+        <div>
+
+            <div class="p-3 d-flex justify-content-between">
+                <h4>List of Debtors</h4>
+                <div>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#add-debtor-form">Register Debtor</button>
+                </div>
+            </div>
+
+            <table class="table table-striped" id="debtors-list">
+                <thead>
+                    <tr>
+                        <th>Debtor Name</th>
+                        <th>Total Debt</th>
+                        <th>Balance</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <!-- Modal adding a debtor -->
+    <div class="modal fade" id="add-debtor-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <form class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add/Update Debtor</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <!-- Form fields -->
+                <div class="form-group">
+                    <label for="name">Debtor Name</label>
+                    <input type="text" id="debtorName" name="debtorName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="idNumber">Id Number</label>
+                    <input type="number" id="idNumber" name="idNumber" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="number" id="phoneNumber" name="phoneNumber" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="debtAmount">Debt Amount</label>
+                    <input type="number" id="debtAmount" name="debtAmount" min="10000" value="10000" class="form-control" required>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="addDebtorBtn">Add Debtor</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+    <!-- Statement Modal -->
+    <div class="modal fade" id="statementModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Debtor Statement</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+               <table class="table table-striped table-sm">
+                <thead>
+                    <tr>Repayment Amount</tr>
+                    <tr>Balance</tr>
+                    <tr>Date</tr>
+                </thead>
+               </table>
+                
+            </div>
+        </div>
+        </div>
+      </div>
+
+</body>
+
+</html>
