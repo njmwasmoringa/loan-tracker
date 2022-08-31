@@ -23,7 +23,40 @@
       "debtAmount": 12000,
       "balance": 12000,
       "id": 3
+    },
+    {
+      "debtorName": "Mwangi",
+      "idNumber": "7987",
+      "phoneNumber": "4345345",
+      "debtAmount": 960000,
+      "balance": 960000,
+      "id": 4
     }
   ],
-  "repayments": []
+  "repayments": [
+    {
+      "date": "2022-08-31T16:11",
+      "amount": "1000",
+      "debtorId": "1",
+      "id": 1
+    },
+    {
+      "date": "2022-09-04T16:15",
+      "amount": "1000",
+      "debtorId": "1",
+      "id": 2
+    },
+    {
+      "date": "2022-08-31T14:17",
+      "amount": "10000",
+      "debtorId": "3",
+      "id": 3
+    },
+    {
+      "date": "2022-08-31T18:21",
+      "amount": "50000",
+      "debtorId": "2",
+      "id": 4
+    }
+  ]
 }
