@@ -146,7 +146,7 @@ function updateDebtorsTable(debtors) {
                 document.getElementById('debtorId').value = debtorId;
             }
 
-           
+
         });
     });
 
@@ -187,8 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('totalRepaid').innerHTML = totalRepayments.toLocaleString();
 
         // formular for calculating 20% of amount paid
-        // const totalInterest = totalRepayments *  
-        // document.getElementById('totalInterest').innerHTML = .toLocaleString();
+        const totalInterest = totalRepayments * interest;
+        document.getElementById('totalInterest').innerHTML = totalInterest.toLocaleString();
 
     });
 
@@ -202,9 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const repayment = {
             date: document.getElementById('date').value,
-            amount: document.getElementById('repaymentAmount').value,
-            debtorId: document.getElementById('debtorId').value
+            amount: Number(document.getElementById('repaymentAmount').value),
+            debtorId: parseInt(document.getElementById('debtorId').value)
         }
+
+        const debtorIndex = allDebtors.findIndex(d => d.id == repayment.debtorId);
+        allDebtors[debtorIndex].balance -= repayment.amount;
 
         const button = document.getElementById("repayLoanBtn");
         button.disabled = true;
@@ -220,6 +223,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 button.disabled = false;
                 button.innerHTML = "Repay Loan";
             });
+
+        // update the debtor balance
+        fetch(`${apiHost}/debtors/${repayment.debtorId}`, {
+            method:'PATCH',
+            body: JSON.stringify(allDebtors[debtorIndex]),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(updateDebtorsTable(allDebtors))
     });
 
 

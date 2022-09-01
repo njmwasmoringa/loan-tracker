@@ -5,7 +5,7 @@
       "idNumber": "345345",
       "phoneNumber": "345345",
       "debtAmount": 60000,
-      "balance": 60000,
+      "balance": 50000,
       "id": 1
     },
     {
@@ -13,7 +13,7 @@
       "idNumber": "09098",
       "phoneNumber": "0980",
       "debtAmount": 2400000,
-      "balance": 2400000,
+      "balance": 1400000,
       "id": 2
     },
     {
@@ -35,28 +35,16 @@
   ],
   "repayments": [
     {
-      "date": "2022-08-31T16:11",
-      "amount": "1000",
-      "debtorId": "1",
+      "date": "2022-09-01T13:26",
+      "amount": 10000,
+      "debtorId": 1,
       "id": 1
     },
     {
-      "date": "2022-09-04T16:15",
-      "amount": "1000",
-      "debtorId": "1",
+      "date": "2022-09-01T13:26",
+      "amount": 1000000,
+      "debtorId": 2,
       "id": 2
-    },
-    {
-      "date": "2022-08-31T14:17",
-      "amount": "10000",
-      "debtorId": "3",
-      "id": 3
-    },
-    {
-      "date": "2022-08-31T18:21",
-      "amount": "50000",
-      "debtorId": "2",
-      "id": 4
     }
   ]
 }
