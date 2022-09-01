@@ -64,10 +64,10 @@ function addDebtor(evt) {
 // A function for getting all the loan repayments and returning a filtered array
 function getReplayments(debtorId) {
     return fetch(`${apiHost}/repayments`).then(response => response.json())
-    .then(repayments=>{
-        allRepayments = repayments;
-        return repayments;
-    })
+        .then(repayments => {
+            allRepayments = repayments;
+            return repayments;
+        })
 }
 
 // a function for retrieving all the debtors and displaying them in the table
@@ -90,10 +90,27 @@ function updateDebtorsTable(debtors) {
         <td>${debtor.debtAmount.toLocaleString()}</td>
         <td>${debtor.balance.toLocaleString()}</td>
         <td>
-            <button type="button" class="btn btn-warning repaymentBtn" data-bs-toggle="modal" 
-                data-bs-target="#repayment-form" data-id="${debtor.id}">Repayment</button>
-            <button type="button" class="btn btn-warning statementBtn" 
-                data-bs-toggle="modal" data-bs-target="#statementModal" data-id="${debtor.id}">Statement</button>
+            <div class="bs-actions">
+                <button type="button" class="btn btn-warning repaymentBtn" data-bs-toggle="modal" 
+                    data-bs-target="#repayment-form" data-id="${debtor.id}">Repayment</button>
+
+                <button type="button" class="btn btn-warning statementBtn" 
+                    data-bs-toggle="modal" data-bs-target="#statementModal" 
+                    data-id="${debtor.id}">Statement</button>
+            </div>
+
+            <div class="more">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    More
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item repaymentBtn" data-bs-toggle="modal" 
+                    data-bs-target="#repayment-form" data-id="${debtor.id}" href="#">Repayment</a></li>
+                    <li><a class="dropdown-item statementBtn" 
+                    data-bs-toggle="modal" data-bs-target="#statementModal" 
+                    data-id="${debtor.id}" href="#">Statement</a></li>
+                </ul>
+            </div>
         </td>
     </tr>`;
         }).join('');
@@ -103,9 +120,9 @@ function updateDebtorsTable(debtors) {
         btn.addEventListener('click', () => {
             //get the debtor id using dataset attribute in statement button as 'data-id="${debtor.id}"'
             const debtorId = btn.dataset.id;
-            
+
             //check if the clicked button is statement button
-            if(btn.classList.contains('statementBtn')){
+            if (btn.classList.contains('statementBtn')) {
                 // Tell the user to be patient while the statement loads
                 statementModal.querySelector('#statementModal tbody').innerHTML = `<tr>
                     <td colspan="3">Loading statement....</td>
@@ -114,48 +131,50 @@ function updateDebtorsTable(debtors) {
                 getReplayments(debtorId).then(statement => {
                     return statement.filter(record => record.debtorId == debtorId);
                 })
-                .then(statement => {
-                    statementModal.querySelector('#statementModal tbody').innerHTML = statement.map(record => `
+                    .then(statement => {
+                        statementModal.querySelector('#statementModal tbody').innerHTML = statement.map(record => `
                     <tr>
                         <td>${record.amount}</td>
                         <td>${record.amount}</td>
                         <td>${(new Date(record.date)).toLocaleString()}</td>
                     </tr>`).join("");
-                });
+                    });
             }
 
-             //check if the clicked button is repayment button
-             if(btn.classList.contains('repaymentBtn')){                    
+            //check if the clicked button is repayment button
+            if (btn.classList.contains('repaymentBtn')) {
                 document.getElementById('debtorId').value = debtorId;
             }
+
+           
         });
     });
 
     document.getElementById('totalLoans').innerHTML = totalLoans().toLocaleString();
 }
 
-function repayLoan( repayment ){
+function repayLoan(repayment) {
     return fetch(`${apiHost}/repayments`, {
-        method:'POST',
-        body:JSON.stringify(repayment),
-        headers:{
-            "Content-Type":"application/json"
+        method: 'POST',
+        body: JSON.stringify(repayment),
+        headers: {
+            "Content-Type": "application/json"
         }
     })
 }
 
 // A function for calculating the total loans given out
-function totalLoans(){
+function totalLoans() {
     //use the reduce array method to get total
-    return allDebtors.reduce((total, debtor)=>{
+    return allDebtors.reduce((total, debtor) => {
         return total += debtor.debtAmount;
     }, 0);
 }
 
 // A function for calculating the total paid loans
-function totalRepaidAmount(){
+function totalRepaidAmount() {
     //use the reduce array method to get total
-    return allRepayments.reduce((total, repayment)=>{
+    return allRepayments.reduce((total, repayment) => {
         return total += Number(repayment.amount);
     }, 0);
 }
@@ -163,10 +182,10 @@ function totalRepaidAmount(){
 document.addEventListener("DOMContentLoaded", () => {
     console.log('Content has loaded');
     getDebtors();
-    getReplayments().then(repayments=>{
+    getReplayments().then(repayments => {
         const totalRepayments = totalRepaidAmount();
         document.getElementById('totalRepaid').innerHTML = totalRepayments.toLocaleString();
-        
+
         // formular for calculating 20% of amount paid
         // const totalInterest = totalRepayments *  
         // document.getElementById('totalInterest').innerHTML = .toLocaleString();
@@ -176,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addDebtorForm = document.getElementById('add-debtor-form');
     addDebtorForm.addEventListener('submit', addDebtor);
 
-    document.getElementById('repayment-form').addEventListener('submit', evt=>{
+    document.getElementById('repayment-form').addEventListener('submit', evt => {
         evt.preventDefault();
 
         const form = evt.target;
@@ -190,19 +209,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const button = document.getElementById("repayLoanBtn");
         button.disabled = true;
         button.innerHTML = "Repaying...";
-        repayLoan(repayment).then(response=>{
+        repayLoan(repayment).then(response => {
             console.log("Repayment done successfully");
             form.reset();
         })
-        .catch(error=>{
-            console.log(error.message)
-            form.reset();
-        }).finally(()=>{
-            button.disabled = false;
-            button.innerHTML = "Repay Loan";
-        });
+            .catch(error => {
+                console.log(error.message)
+                form.reset();
+            }).finally(() => {
+                button.disabled = false;
+                button.innerHTML = "Repay Loan";
+            });
     });
-    
-    
+
+
 
 });

@@ -1,0 +1,35 @@
+.more{
+    display: none;
+}
+
+.card{
+    width: 100%;
+}
+
+@media(max-width:1000px){
+
+    .more{
+        display: block;
+    }
+
+    .bs-actions{
+        display: none;
+        position: absolute;
+        z-index: 10;
+        background-color: rgba(130, 85, 255, 0.5);
+    }
+
+    .bs-actions-vertically{
+        display: flex;
+        flex-direction: column;
+    }
+
+    h5{
+        font-size: 14px !important;
+    }
+
+    h3{
+        font-size: 18px !important;
+    }
+
+}
